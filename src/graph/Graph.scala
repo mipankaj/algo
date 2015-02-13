@@ -4,30 +4,29 @@ import scala.collection.mutable.ListBuffer
 import scala.io.Source
 
 class Graph(numberOfVertices: Int) {
-	private val vertices = new Array[Int](numberOfVertices)
-	private val buckets = new Array[ListBuffer[Int]](numberOfVertices)
-	
-    (0 to numberOfVertices-1).foreach { x => 
-      vertices(x) = x
-      buckets(x) = ListBuffer.empty[Int]
-	}
-	
-	def addEdge(v1: Int, v2: Int) = {
-	  buckets(v1) += v2
-	  buckets(v2) += v1
-	}
-	
-	def addBucket(v: Int, iterable: ListBuffer[Int]) = buckets(v) = iterable 
-	
-	def adj(v: Int) = buckets(v).toIterable 
-	  
-	def totalV = numberOfVertices
-	def totalE = {
-	  val l = buckets.map(_.toList.size)
-	  l.sum
-	}
-}
+  private val vertices = new Array[Int](numberOfVertices)
+  private val buckets = new Array[ListBuffer[Int]](numberOfVertices)
 
+  (0 to numberOfVertices - 1).foreach { x =>
+    vertices(x) = x
+    buckets(x) = ListBuffer.empty[Int]
+  }
+
+  def addEdge(v1: Int, v2: Int) = {
+    buckets(v1) += v2
+    buckets(v2) += v1
+  }
+
+  def addBucket(v: Int, iterable: ListBuffer[Int]) = buckets(v) = iterable
+
+  def adj(v: Int) = buckets(v).toIterable
+
+  def totalV = numberOfVertices
+  def totalE = {
+    val l = buckets.map(_.toList.size)
+    l.sum
+  }
+}
 
 object GraphTest {
   val mapping = Map(
@@ -49,7 +48,7 @@ object GraphTest {
     5 -> "F",
     6 -> "G",
     7 -> "H"
-  )  
+  )
   def main(args: Array[String]) {
 
     val source = Source.fromFile("in.txt")
@@ -71,8 +70,6 @@ object GraphTest {
   }
 }
 
-
-
 class DepthFirstSearch(graph: Graph, v: Int) {
   val marked = new Array[Boolean](graph.totalV)
   val edgeTo = new Array[Int](graph.totalV)
@@ -90,7 +87,7 @@ class DepthFirstSearch(graph: Graph, v: Int) {
   private def dfs(g: Graph, v: Int): Unit = {
     marked(v) = true
     print(rev(v) + " ")
-    
+
     for (av <- g.adj(v)) {
       if (!marked(av)) {
         dfs(g, av)
@@ -98,15 +95,15 @@ class DepthFirstSearch(graph: Graph, v: Int) {
       }
     }
   }
-  
+
   def visits = {
-    
+
   }
-  
+
   def pathTo(s: Int): String = {
     var path = ""
     var prev = edgeTo(s)
-    while(prev != v) {
+    while (prev != v) {
       path = s"$prev " + path
       prev = edgeTo(s)
     }
