@@ -1,0 +1,5 @@
+package unionfind
+
+class QuickFind {
+
+}
