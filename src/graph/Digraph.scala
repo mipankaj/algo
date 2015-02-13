@@ -3,3 +3,4 @@ package graph
 object Digraph {
 
 }
+
