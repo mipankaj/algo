@@ -2,7 +2,7 @@ package examples
 
 object LongestUniqueSubstring {
 
-  val input = "aaabcaaabded"
+  val input = "abcdefgabcdefghd"
 
   def main(args: Array[String]) {
     println(lus(input))
