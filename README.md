@@ -1,2 +1,2 @@
 # algo
-algorithms 
+some algorithms examples
